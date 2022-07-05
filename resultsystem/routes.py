@@ -93,9 +93,8 @@ def add():
         return render_template("adminview.html",alldata=alldata)
     return redirect(url_for('adminlogin'))
 
-@app.route('/insert', methods = ['POST'])
+@app.route("/insert_data", methods = ['GET','POST'])
 def insert():
-
     if request.method == "POST":
         flash("Data Inserted Successfully")
         name = request.form['name']
@@ -104,7 +103,9 @@ def insert():
         #cur = mysql.connection.cursor()
         #cur.execute("INSERT INTO students (name, email, phone) VALUES (%s, %s, %s)", (name, email, phone))
         #mysql.connection.commit()
-        return redirect(url_for('Index'))
+        return redirect(url_for('adminview'))
+    return render_template("insert_data.html")
+    
 
 
 
