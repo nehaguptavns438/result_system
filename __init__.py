@@ -12,5 +12,3 @@ bcrypt = Bcrypt()
 
 
 from resultsystem import routes
-
-
