@@ -1,0 +1,39 @@
+<!-- {% extends "layout.html" %} -->
+
+
+
+{% block content %}
+
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand">Fynd-Result</a>
+  </div>
+</nav>
+
+<br>
+<br>
+<br>
+<h1><center><u>OTP VALIDATION PAGE</u></center></h1>
+<br>
+<br>
+<br>
+<div class="p-3 mb-2 bg-dark text-white">
+
+    <form method="post" action="http://127.0.0.1:5000/validateotp/{{rollno}}">
+
+        <label for="otp">Enter the OTP sent on Email</label>
+        <input type="number" name="otp">
+        <input type="submit" class="btn btn-success" name="otpsubmit"></button>
+    </form>
+
+    <form method="post" action="http://127.0.0.1:5000/resendotp">
+      <input type="submit" class="btn btn-success" name="resendotp" value="Resend Otp"></button>
+  </form>
+
+    <div>
+        <p><strong>{{message}}</strong></p>
+  
+      </div>
+    </div>
+{% endblock %}
