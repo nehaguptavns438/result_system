@@ -71,6 +71,9 @@ def login():
 @app.route("/adminview",methods=['GET','POST'])
 def add():
     if 'logged_in' in session:
+
+        return render_template("adminview.html")
+    return redirect(url_for('adminlogin'))
             
         # if request.method == 'POST':
         #     rollno = request.form.get('rollno')
@@ -93,8 +96,6 @@ def add():
         #     db.session.commit()
 
         # alldata = Student.query.all()
-         return render_template("adminview.html")
-    return redirect(url_for('adminlogin'))
 
 @app.route("/insert_data", methods = ['GET','POST'])
 def insert():
@@ -118,9 +119,10 @@ def insert():
                 #Else if No Exception Then Add the data
             db.session.add(stu)
             db.session.commit()
-            return render_template("adminview.html")
-        alldata = Student.query.all()
-        return render_template("insert_data.html",alldata=alldata)
+            alldata = Student.query.all()
+            return render_template("adminview.html", alldata=alldata)
+        
+        return render_template("insert_data.html")
     return redirect('/adminlogin')
        
     

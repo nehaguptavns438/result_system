@@ -9,5 +9,5 @@ class Student(db.Model):
     science_marks = db.Column(db.Integer())
     english_marks = db.Column(db.Integer())
 
-    # def __repr__(self):
-    #     return f"Student('{self.roolno}','{self.name}','{self.email}','{self.mobile}','{self.math_marks}','{self.science_marks}','{self.english_marks}')"
+    def __repr__(self):
+        return f"Student('{self.roolno}','{self.name}','{self.email}','{self.mobile}','{self.math_marks}','{self.science_marks}','{self.english_marks}')"
