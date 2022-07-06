@@ -1,14 +1,22 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from .extenstion import db
 from flask_bcrypt import Bcrypt
+from .routes import main
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Ram#12345@localhost/result'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-db = SQLAlchemy(app)
+def create_app(config_file='settings.py'):
 
-bcrypt = Bcrypt()
+    app = Flask(__name__)
+    
+    app.config.from_pyfile(config_file)
+
+    db.init_app(app)
+
+    
+
+    app.register_blueprint(main)
 
 
-from resultsystem import routes
+    bcrypt = Bcrypt()
+
+
+    return app

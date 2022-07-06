@@ -7,6 +7,48 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
+    <div class="container my-3">
+        <h2>Add Students</h2><br>
+    <form action="/insert_data" method="POST">
+      <div class="mb-3">
+      <label>Enter your Student Roll No</label>
+        <input type="number"  name="rollno" required><br>
+      </div>
+    
+    <div class="mb-3">
+    <label>Enter your Student Full Name</label>
+        <input type="text" name="name" required><br>
+    </div>
+    
+      <div class="mb-3">
+    <label>Enter your EmailID</label>
+        <input type="text" name="email" required><br>
+      </div>
+      <div class="mb-3">
+    
+    <label>Enter your Mobile Number</label>
+        <input type="text" name="mobile" required><br>
+      </div>
+      <div class="mb-3">
+    
+    <label>Enter your Maths Marks</label>
+    <input type="text" name="math_marks" required><br>
+      </div>
+      <div class="mb-3">
+    <label>Enter your Science Marks</label>
+    <input type="text" name="science_marks" required><br>
+      </div>
+      <div class="mb-3">
+    <label>Enter your English Marks</label>
+    <input type="text" name="english_marks" required><br>
+      </div>
+    
+    <input type="submit" class="btn btn-outline-success" href="adminview" name="register"></input>
+    
+    </form>
+    </div>
 </body>
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </html>

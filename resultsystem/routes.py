@@ -1,9 +1,9 @@
 from crypt import methods
-from flask import render_template, url_for, flash, redirect,request, session
-from resultsystem import app
+from flask import Blueprint, render_template, url_for, flash, redirect,request, session
+#from resultsystem import app
 from resultsystem.forms import AdminLoginForm
 from resultsystem.models import Student
-from resultsystem import db
+from .extenstion import db
 import os
 import smtplib
 from email.message import EmailMessage
@@ -12,6 +12,9 @@ import imghdr #Image type
 import pdfkit
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
+main = Blueprint('main', __name__)
+
+app = main
 posts = [
 
      {
@@ -69,7 +72,35 @@ def login():
 def add():
     if 'logged_in' in session:
             
-        if request.method == 'POST':
+        # if request.method == 'POST':
+        #     rollno = request.form.get('rollno')
+        #     name = request.form.get('name')
+        #     email = request.form.get('email')
+        #     mobile = request.form.get('mobile')
+        #     math_marks = request.form.get('math_marks')
+        #     science_marks = request.form.get('science_marks')
+        #     english_marks = request.form.get('english_marks')
+
+        #     stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)
+        #     #This will Work to handle Exception IF again Same data is tried to added
+        #     rollnodb = Student.query.get(rollno)
+        #     if rollnodb is not None:
+        #         flash("Roll No already Exist", "info")
+        #         return redirect("/adminview")
+
+        #     #Else if No Exception Then Add the data
+        #     db.session.add(stu)
+        #     db.session.commit()
+
+        # alldata = Student.query.all()
+         return render_template("adminview.html")
+    return redirect(url_for('adminlogin'))
+
+@app.route("/insert_data", methods = ['GET','POST'])
+def insert():
+    if 'logged_in' in session:
+        #form = AddStudentForm()
+        if request.method == "POST":
             rollno = request.form.get('rollno')
             name = request.form.get('name')
             email = request.form.get('email')
@@ -77,34 +108,21 @@ def add():
             math_marks = request.form.get('math_marks')
             science_marks = request.form.get('science_marks')
             english_marks = request.form.get('english_marks')
-
-            stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)
+            stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)        
             #This will Work to handle Exception IF again Same data is tried to added
             rollnodb = Student.query.get(rollno)
             if rollnodb is not None:
                 flash("Roll No already Exist", "info")
-                return redirect("/adminview")
+                return redirect ('/adminview')
 
-            #Else if No Exception Then Add the data
+                #Else if No Exception Then Add the data
             db.session.add(stu)
             db.session.commit()
-
+            return render_template("adminview.html")
         alldata = Student.query.all()
-        return render_template("adminview.html",alldata=alldata)
-    return redirect(url_for('adminlogin'))
-
-@app.route("/insert_data", methods = ['GET','POST'])
-def insert():
-    if request.method == "POST":
-        flash("Data Inserted Successfully")
-        name = request.form['name']
-        email = request.form['email']
-        phone = request.form['phone']
-        #cur = mysql.connection.cursor()
-        #cur.execute("INSERT INTO students (name, email, phone) VALUES (%s, %s, %s)", (name, email, phone))
-        #mysql.connection.commit()
-        return redirect(url_for('adminview'))
-    return render_template("insert_data.html")
+        return render_template("insert_data.html",alldata=alldata)
+    return redirect('/adminlogin')
+       
     
 
 
@@ -167,3 +185,6 @@ def validateotp(rollno):
                 return redirect("/endpage")
             return render_template("home.html", msg = "Otp not verified Wrong OTP!")
         return render_template("home.html", msg = "Session Expired (Otp Already Used) Try again !")
+
+
+
