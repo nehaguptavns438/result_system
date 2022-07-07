@@ -91,11 +91,10 @@ def add():
             db.session.add(stu)
             db.session.commit()
             flash("Data Inserted Successfully")
-            alldata = Student.query.all()
-            # return redirect(url_for('add'))
-            return render_template("adminview.html", alldata=alldata)
+        alldata = Student.query.all()
         
-        return render_template("adminview.html")
+        return render_template("adminview.html", alldata=alldata)
+        # return render_template("adminview.html")
     return redirect('/adminlogin')
 
 # @app.route("/insert", methods = ['GET','POST'])
