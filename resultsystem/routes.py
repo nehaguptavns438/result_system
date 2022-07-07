@@ -97,8 +97,8 @@ def add():
 
         # alldata = Student.query.all()
 
-@app.route("/insert_data", methods = ['GET','POST'])
-def insert():
+@app.route("/insert", methods = ['GET','POST'])
+def add_data():
     if 'logged_in' in session:
         #form = AddStudentForm()
         if request.method == "POST":
@@ -120,15 +120,11 @@ def insert():
             db.session.add(stu)
             db.session.commit()
             alldata = Student.query.all()
+            # return redirect(url_for('add'))
             return render_template("adminview.html", alldata=alldata)
         
-        return render_template("insert_data.html")
+        return render_template("adminview.html")
     return redirect('/adminlogin')
-       
-    
-
-
-
 @app.route("/validateotp/<int:rollno>", methods=['POST'])
 def validateotp(rollno):
     if request.method == 'POST':
