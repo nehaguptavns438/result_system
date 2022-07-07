@@ -71,35 +71,6 @@ def login():
 @app.route("/adminview",methods=['GET','POST'])
 def add():
     if 'logged_in' in session:
-
-        return render_template("adminview.html")
-    return redirect(url_for('adminlogin'))
-            
-        # if request.method == 'POST':
-        #     rollno = request.form.get('rollno')
-        #     name = request.form.get('name')
-        #     email = request.form.get('email')
-        #     mobile = request.form.get('mobile')
-        #     math_marks = request.form.get('math_marks')
-        #     science_marks = request.form.get('science_marks')
-        #     english_marks = request.form.get('english_marks')
-
-        #     stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)
-        #     #This will Work to handle Exception IF again Same data is tried to added
-        #     rollnodb = Student.query.get(rollno)
-        #     if rollnodb is not None:
-        #         flash("Roll No already Exist", "info")
-        #         return redirect("/adminview")
-
-        #     #Else if No Exception Then Add the data
-        #     db.session.add(stu)
-        #     db.session.commit()
-
-        # alldata = Student.query.all()
-
-@app.route("/insert", methods = ['GET','POST'])
-def add_data():
-    if 'logged_in' in session:
         #form = AddStudentForm()
         if request.method == "POST":
             rollno = request.form.get('rollno')
@@ -119,12 +90,46 @@ def add_data():
                 #Else if No Exception Then Add the data
             db.session.add(stu)
             db.session.commit()
+            flash("Data Inserted Successfully")
             alldata = Student.query.all()
             # return redirect(url_for('add'))
             return render_template("adminview.html", alldata=alldata)
         
         return render_template("adminview.html")
     return redirect('/adminlogin')
+
+# @app.route("/insert", methods = ['GET','POST'])
+# def add_data():
+#     if 'logged_in' in session:
+#         #form = AddStudentForm()
+#         if request.method == "POST":
+#             flash("Data Inserted Successfully")
+
+
+
+#             rollno = request.form.get('rollno')
+#             name = request.form.get('name')
+#             email = request.form.get('email')
+#             mobile = request.form.get('mobile')
+#             math_marks = request.form.get('math_marks')
+#             science_marks = request.form.get('science_marks')
+#             english_marks = request.form.get('english_marks')
+#             stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)        
+#             #This will Work to handle Exception IF again Same data is tried to added
+#             rollnodb = Student.query.get(rollno)
+#             if rollnodb is not None:
+#                 flash("Roll No already Exist", "info")
+#                 return redirect ('/adminview')
+
+#                 #Else if No Exception Then Add the data
+#             db.session.add(stu)
+#             db.session.commit()
+#             alldata = Student.query.all()
+#             # return redirect(url_for('add'))
+#             return render_template("adminview.html", alldata=alldata)
+        
+#         return render_template("adminview.html")
+#     return redirect('/adminlogin')
 @app.route("/validateotp/<int:rollno>", methods=['POST'])
 def validateotp(rollno):
     if request.method == 'POST':
