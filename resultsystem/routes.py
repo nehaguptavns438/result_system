@@ -97,7 +97,7 @@ def add():
         # return render_template("adminview.html")
     return redirect('/adminlogin')
 
-@app.route("/update" ,methods=['POST','GET'])
+@app.route("/update",methods=['POST','GET'])
 def update():
     if 'logged_in' in session:
 
@@ -122,10 +122,10 @@ def update():
             stu.english_marks = english_marks
             db.session.add(stu)
             db.session.commit()
-            return redirect("/adminview")
+            return redirect('/adminview')
         # stu = Student.query.filter_by(rollno=rollno).first()
-        # return render_template('update_data.html',stu=stu)
-    return redirect('/adminlogin')
+        # return render_template('adminview.html',stu=stu)
+        return redirect('/adminlogin')
 
 # @app.route("/insert", methods = ['GET','POST'])
 # def add_data():
