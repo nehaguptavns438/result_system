@@ -67,7 +67,7 @@ def home():
         else:
             flash("Roll No associated with name not found in DB", "info")
             return redirect('/')
-    return render_template("home.html")
+    return render_template("home.html",posts=posts)
 
 @app.route("/resendotp", methods=['POST'])
 def resend():
@@ -140,6 +140,11 @@ def validateotp(rollno):
             return render_template("home.html", msg = "Otp not verified Wrong OTP!")
         return render_template("home.html", msg = "Session Expired (Otp Already Used) Try again !")
 
+@app.route("/endpage", methods=['GET'])
+def endpage():
+    #Delete the generated pdf after sending email
+    # removePdf()
+    return render_template("endpage.html",message="Check your Email for the result")
 
 
 @app.route("/adminlogin", methods=['GET', 'POST'])
@@ -211,8 +216,10 @@ def update():
             stu.english_marks = english_marks
             db.session.add(stu)
             db.session.commit()
+            flash("Data updated Successfully")
+            
             return redirect('/adminview')
-            flash("Data Inserted Successfully")
+            
         return redirect('/adminlogin')
 
 @app.route("/delete/<int:rollno>")
@@ -222,6 +229,7 @@ def delete(rollno):
         stu = Student.query.filter_by(rollno=rollno).first()
         db.session.delete(stu)
         db.session.commit()
+        flash("Data Deleted Successfully")
         return redirect("/adminview")
     return redirect('/adminlogin')
 
