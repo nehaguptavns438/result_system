@@ -233,6 +233,11 @@ def delete(rollno):
         return redirect("/adminview")
     return redirect('/adminlogin')
 
+@app.route("/logout")
+def logout():
+    session.pop('logged_in',None)
+    return redirect("/adminlogin")
+
 
 
 
