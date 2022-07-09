@@ -2,6 +2,8 @@ from crypt import methods
 from flask import Blueprint, render_template,flash, redirect,request, session
 #from resultsystem import app
 from resultsystem.forms import AdminLoginForm
+from resultsystem.constants import Email_data
+from resultsystem.constants import Admin_data
 from resultsystem.models import Student
 from flask_mail import Mail
 from .extenstion import db
@@ -36,14 +38,14 @@ def generateOtp():
 def sendOtp(email,x):
         msg = EmailMessage()
         msg['Subject'] = 'OTP FROM Akash Server'
-        msg['From'] = 'examresultsystembot@gmail.com'
+        msg['From'] = Email_data.EMAIL
         msg['To'] = email
         # x = generateOtp()
         msg.set_content(str(x))
         session['response'] = str(x)  #Storing otp in session
 
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login('examresultsystembot@gmail.com', 'ksguocbvgsskntcj')
+            smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
                 
             smtp.send_message(msg)
 
@@ -101,8 +103,8 @@ def validateotp(rollno):
 
                 # if  otp == int(userotp):
                 msg = EmailMessage()
-                msg['Subject'] = 'Mail from neha server'
-                msg['From'] = 'examresultsystembot@gmail.com'
+                msg['Subject'] = 'Fynd Result System'
+                msg['From'] = Email_data.EMAIL
                 msg['To'] = emaildb
                 # msg.set_content("Your Password is last 4 digit of mobile no")
                 html_msg = html
@@ -131,7 +133,7 @@ def validateotp(rollno):
                     
 
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                    smtp.login('examresultsystembot@gmail.com', 'ksguocbvgsskntcj')
+                    smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
                         
                     smtp.send_message(msg)
 
@@ -152,7 +154,7 @@ def login():
     form = AdminLoginForm()
     if request.method == "POST":
         if form.validate_on_submit():
-            if form.username.data == 'adminblog' and form.password.data == 'password':
+            if form.username.data == Admin_data.USERNAME  and form.password.data == Admin_data.PASSWORD:
                 session['logged_in'] = True
                 flash('Yoe have been logged in!', 'success')
                 return redirect("/adminview")
