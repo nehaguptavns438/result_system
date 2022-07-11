@@ -1,34 +1,65 @@
-<!-- {% extends "layout.html" %} -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-{% block content %}
+    {% if title %}
+        <title>Fynd Academy - {{ title }}</title>
+    {% else %}
+        <title>Fynd Academy</title>
+    {% endif %}
 
-
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <div class="container-fluid">
-    <a class="navbar-brand">Fynd-Result</a>
-  </div>
-</nav>
-
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Fynd Academy</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="/">Home</a>
+              <a class="nav-item nav-link" href="/about">About</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="/adminlogin">AdminLogin</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 <br>
 <br>
 <br>
-<h1><center><u>OTP VALIDATION PAGE</u></center></h1>
+<div class="well text-center">
+  <h1>Validate OTP</h1>
+</div>
 <br>
 <br>
 <br>
-<div class="p-3 mb-2 bg-dark text-white">
+<div class="p-1 mb-1 bg-secondary text-white">
 
     <form method="post" action="http://127.0.0.1:5000/validateotp/{{rollno}}">
 
-        <label for="otp">Enter the OTP sent on Email</label>
+        <center><label for="otp">Enter the OTP sent on Email</label>
         <input type="number" name="otp">
-        <input type="submit" class="btn btn-success" name="otpsubmit"></button>
+        <input type="submit" class="btn-xsbtn btn-success" name="otpsubmit"></button>
+      </center>
+      
     </form>
 
     <form method="post" action="http://127.0.0.1:5000/resendotp">
-      <input type="submit" class="btn btn-success" name="resendotp" value="Resend Otp"></button>
+      <center><input type="submit" class="btn-xsbtn btn-success" name="resendotp" value="Resend Otp"></button></center>
   </form>
 
     <div>
@@ -36,4 +67,3 @@
   
       </div>
     </div>
-{% endblock %}

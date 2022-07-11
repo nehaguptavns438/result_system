@@ -188,9 +188,11 @@ def add():
             db.session.add(stu)
             db.session.commit()
             flash("Data Inserted Successfully")
-        alldata = Student.query.all()
-        
+        page = request.args.get('page',1, type=int)
+        # page = request.form.get('page_num')
+        alldata = Student.query.paginate(page=int(page), per_page=5)
         return render_template("adminview.html", alldata=alldata)
+        
     return redirect('/adminlogin')
 
 @app.route("/update",methods=['POST','GET'])

@@ -1,6 +1,6 @@
 class Email_data:
     EMAIL = 'examresultsystembot@gmail.com'
-    PASSWORD = 'ksguocbvgsskntcj'
+    PASSWORD = 'grubgibdcbgzpymq'
     
 class Admin_data:
     USERNAME = 'adminblog'
