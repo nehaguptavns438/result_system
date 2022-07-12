@@ -1,13 +1,12 @@
 {% extends "layout.html" %}
 {% block content%}
-    {% for post in posts %}
     <article class="media content-section, center">
         <div class="media-body">
           <div class="article-metadata">
-          <h1 class="mr-2">{{ post.author }}</h>
+          <h1 class="mr-2">Fynd Academy</h1>
           </div>
-          <h3 class="article-title">{{ post.title }}</h3>
-          <p class="article-content">{{ post.content }} Takshasila (in modern-day Pakistan) was the earliest recorded centre of higher learning in India from possibly 8th
+          <h3 class="article-title">Welcome to Fynd Results</h3>
+          <p class="article-content">Result system model to display Fynd Academy grads result . Takshasila (in modern-day Pakistan) was the earliest recorded centre of higher learning in India from possibly 8th
             century BCE, and it is debatable whether it could be regarded a university or not in modern sense, since teachers living
             there may not have had official membership of particular colleges, and there did not seem to have existed purpose-built
             lecture halls and residential quarters in Taxila, in contrast to the later Nalanda university in eastern India. Nalanda
@@ -15,5 +14,4 @@
             taught in Ariano -Páli language</p>
         </div>
       </article>
-    {% endfor%}
 {% endblock content %}

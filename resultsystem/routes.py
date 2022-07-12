@@ -1,6 +1,5 @@
 from crypt import methods
 from flask import Blueprint, render_template,flash, redirect,request, session
-#from resultsystem import app
 from resultsystem.forms import AdminLoginForm
 from resultsystem.constants import Email_data
 from resultsystem.constants import Admin_data
@@ -18,19 +17,6 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 main = Blueprint('main', __name__)
 
 app = main
-
-
-
-posts = [
-
-     {
-        'author':'Fynd Academy',
-        'title':'Welcome to Fynd Results',
-        'content':'Result system model to display Fynd Academy grads result ',
-        'date_posted':'April 21,2018'
-    }
-
-]
 
 def generateOtp():
     return random.randint(1111,9999)
@@ -69,7 +55,7 @@ def home():
         else:
             flash("Roll No associated with name not found in DB", "info")
             return redirect('/')
-    return render_template("home.html",posts=posts)
+    return render_template("home.html")
 
 @app.route("/resendotp", methods=['POST'])
 def resend():
@@ -89,13 +75,8 @@ def validateotp(rollno):
 
         data = Student.query.get(rollno)
         emaildb = data.email 
-        # mathmark=data.math_marks
-        # engmark=data.english_marks
-
         html = render_template('resultdata.html',data=data)
-
         userotp = request.form['otp']
-
         if 'response' in session: #Checking for response in session
             s = session['response']
             session.pop('response',None)
