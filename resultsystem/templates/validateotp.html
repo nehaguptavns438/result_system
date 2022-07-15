@@ -49,7 +49,7 @@
 <br>
 <div class="p-1 mb-1 bg-secondary text-white">
 
-    <form method="post" action="http://127.0.0.1:5000/validateotp/{{rollno}}">
+    <form method="post" action="/validateotp/{{rollno}}">
 
         <center><label for="otp">Enter the OTP sent on Email</label>
         <input type="number" name="otp">
@@ -58,12 +58,9 @@
       
     </form>
 
-    <form method="post" action="http://127.0.0.1:5000/resendotp">
+    <form method="post" action="/resendotp">
       <center><input type="submit" class="btn-xsbtn btn-success" name="resendotp" value="Resend Otp"></button></center>
   </form>
 
-    <div>
-        <p><strong>{{message}}</strong></p>
-  
-      </div>
+    
     </div>
