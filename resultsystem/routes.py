@@ -119,6 +119,7 @@ def validateotp(rollno):
                 msg['Subject'] = 'Fynd Result System'
                 msg['From'] = Email_data.EMAIL
                 msg['To'] = emaildb
+                msg['body'] = "our Password is last 4 digit of mobile no"
                 msg.set_content("Your Password is last 4 digit of mobile no")
                 html_msg = html
                 
@@ -126,12 +127,14 @@ def validateotp(rollno):
                 msg.add_alternative(html_msg, subtype='html')
                 
                 # adding the Image Attachment
-                with open('resultsystem/static/fynd.jpeg','rb') as attach_file:
-                    image_name = attach_file.name
-                    image_type = imghdr.what(attach_file.name)
-                    image_data = attach_file.read()
+                # with open('resultsystem/static/fynd.jpeg','rb') as attach_file:
+                #     image_name = attach_file.name
+                #     image_type = imghdr.what(attach_file.name)
+                #     image_data = attach_file.read()
 
-                msg.add_attachment(image_data, maintype='image',subtype=image_type,filename=image_name)
+                msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
+                                        Example:
+                        Your password is : xxxxxx1234''')
                 mobile = data.mobile
                 encrypt_pdf(html,mobile) 
     
@@ -149,8 +152,8 @@ def validateotp(rollno):
 
                 # return render_template("endpage.html",message="Check your mail for the result")
                 return redirect("/endpage")
-            return render_template("home.html", msg = "Otp not verified Wrong OTP!")
-        return render_template("home.html", msg = "Session Expired (Otp Already Used) Try again !")
+            flash("Invalid OTP .... Please try again", "danger")
+        return render_template("home.html")
 
 
 
