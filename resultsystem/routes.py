@@ -125,13 +125,6 @@ def validateotp(rollno):
                 
 
                 msg.add_alternative(html_msg, subtype='html')
-                
-                # adding the Image Attachment
-                # with open('resultsystem/static/fynd.jpeg','rb') as attach_file:
-                #     image_name = attach_file.name
-                #     image_type = imghdr.what(attach_file.name)
-                #     image_data = attach_file.read()
-
                 msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
                                         Example:
                         Your password is : xxxxxx1234''')
@@ -194,11 +187,15 @@ def add():
             science_marks = request.form.get('science_marks')
             english_marks = request.form.get('english_marks')
             stu= Student(rollno=rollno, name=name, email=email, mobile=mobile, math_marks=math_marks, science_marks=science_marks, english_marks=english_marks)        
+            if len(mobile)!=10:
+                flash("Please enter valid mobile")
+                return redirect ('/adminview')
             #This will Work to handle Exception IF again Same data is tried to added
             rollnodb = Student.query.get(rollno)
             if rollnodb is not None:
                 flash("Roll No already Exist", "info")
                 return redirect ('/adminview')
+            
                 #Else if No Exception Then Add the data
             db.session.add(stu)
             db.session.commit()
@@ -221,6 +218,9 @@ def update():
             math_marks = request.form.get('math_marks')
             science_marks = request.form.get('science_marks')
             english_marks = request.form.get('english_marks')
+            if len(mobile)!=10:
+                flash("Please enter valid mobile")
+                return redirect ('/adminview')
             #object of row of the db related to rollno
             stu = Student.query.filter_by(rollno=rollno).first()
 
