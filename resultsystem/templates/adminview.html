@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  
 
   {% block body %}
 
@@ -24,7 +25,7 @@
         <div class="col md-12">
           <h2>Student List <button type="button" class="btn btn-success pull-right" data-toggle="modal"
               data-target="#mymodal">Add Student Data</button></h2>
-
+              
           {%with messages = get_flashed_messages()%}
 
           {%if messages%}
@@ -194,10 +195,12 @@
 
     </div>
   </div>
+ 
 
   {% endblock %}
 
   </div>
+  
 </body>
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>

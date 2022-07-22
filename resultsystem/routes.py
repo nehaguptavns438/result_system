@@ -1,22 +1,28 @@
-from flask import Blueprint, render_template,flash, redirect,request, session
+from ast import Try
+from flask import Blueprint, render_template,flash, redirect,request, session,send_file
+from pymysql import IntegrityError
 from resultsystem.forms import AdminLoginForm
 from resultsystem.constants import Email_data
 from resultsystem.constants import Admin_data
 from resultsystem.models import Student
-from flask_mail import Mail
+
 from .extenstion import db
-import qrcode
+from flask_cors import CORS
+
+
+
 import os
 import smtplib
 from email.message import EmailMessage
 import random
-import imghdr #Image type
+
 import pdfkit
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 main = Blueprint('main', __name__)
 
 app = main
+CORS(app)
 
 def generateOtp():
     return random.randint(1111,9999)
@@ -151,9 +157,9 @@ def validateotp(rollno):
 
 
 
-@app.route("/endpage", methods=['GET'])
+@app.route("/endpage", methods=['GET','POST'])
 def endpage():
-
+    
     removePdf()
     return render_template("endpage.html")
 
@@ -195,6 +201,13 @@ def add():
             if rollnodb is not None:
                 flash("Roll No already Exist", "info")
                 return redirect ('/adminview')
+
+            alldata = Student.query.all()
+            for student in alldata:
+                if student.email == email:
+                    flash(f"This email already exits: {student.email} ", "info")
+                    return redirect ('/adminview')
+            
             
                 #Else if No Exception Then Add the data
             db.session.add(stu)
@@ -218,9 +231,7 @@ def update():
             math_marks = request.form.get('math_marks')
             science_marks = request.form.get('science_marks')
             english_marks = request.form.get('english_marks')
-            if len(mobile)!=10:
-                flash("Please enter valid mobile")
-                return redirect ('/adminview')
+
             #object of row of the db related to rollno
             stu = Student.query.filter_by(rollno=rollno).first()
 
@@ -232,8 +243,22 @@ def update():
             stu.math_marks = math_marks
             stu.science_marks = science_marks
             stu.english_marks = english_marks
-            db.session.add(stu)
-            db.session.commit()
+            
+            
+            if len(stu.mobile)!=10:
+                flash("Please enter valid mobile")
+                return redirect ('/adminview')
+            try:
+                db.session.add(stu)
+                db.session.commit()
+            except Exception:
+                db.session.rollback()
+                flash(f"This email already exits", "info")
+                return redirect ('/adminview')
+                
+
+            
+            
             flash("Data updated Successfully")
             
             return redirect('/adminview')
