@@ -152,7 +152,7 @@ def validateotp(rollno):
 @app.route("/endpage", methods=['GET','POST'])
 def endpage():
     
-    removePdf()
+    # removePdf()
     return render_template("endpage.html")
 
 
