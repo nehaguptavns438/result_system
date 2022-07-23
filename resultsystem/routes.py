@@ -1,16 +1,9 @@
-from ast import Try
-from flask import Blueprint, render_template,flash, redirect,request, session,send_file
-from pymysql import IntegrityError
+from flask import Blueprint, render_template,flash, redirect,request, session
 from resultsystem.forms import AdminLoginForm
 from resultsystem.constants import Email_data
 from resultsystem.constants import Admin_data
 from resultsystem.models import Student
-
 from .extenstion import db
-from flask_cors import CORS
-
-
-
 import os
 import smtplib
 from email.message import EmailMessage
@@ -22,7 +15,6 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 main = Blueprint('main', __name__)
 
 app = main
-CORS(app)
 
 def generateOtp():
     return random.randint(1111,9999)
