@@ -1,1 +1,1 @@
-web: gunicorn run:resultsystem
+web: gunicorn app:resultsystem
