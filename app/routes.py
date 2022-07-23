@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template,flash, redirect,request, session
-from resultsystem.forms import AdminLoginForm
-from resultsystem.constants import Email_data
-from resultsystem.constants import Admin_data
-from resultsystem.models import Student
+from app.forms import AdminLoginForm
+from app.constants import Email_data
+from app.constants import Admin_data
+from app.models import Student
 from .extenstion import db
 import os
 import smtplib

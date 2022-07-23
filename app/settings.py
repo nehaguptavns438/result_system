@@ -1,4 +1,4 @@
-from resultsystem.constants import Setting
+from app.constants import Setting
 
 SECRET_KEY = Setting.SECRET_KEY
 SQLALCHEMY_DATABASE_URI = Setting.SQLALCHEMY_DATABASE_URI
