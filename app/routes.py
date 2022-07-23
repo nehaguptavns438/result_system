@@ -127,7 +127,7 @@ def validateotp(rollno):
                                         Example:
                         Your password is : xxxxxx1234''')
                 mobile = data.mobile
-                encrypt_pdf(html,mobile) 
+                # encrypt_pdf(html,mobile) 
     
                 # adding the PDF Attachment
                 # with open("StudentData_Encrypted.pdf", 'rb') as fp:
