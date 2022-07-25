@@ -103,46 +103,42 @@ def validateotp(rollno):
         emaildb = data.email 
         
         html = render_template('resultdata.html',data=data)
-
-       
         userotp = request.form['otp']
         if 'response' in session: #Checking for response in session
             s = session['response']
             session.pop('response',None)
             if s == str(userotp):
+                # if otp == int(userotp):
+                    msg = EmailMessage()
+                    msg['Subject'] = 'Fynd Result System'
+                    msg['From'] = Email_data.EMAIL
+                    msg['To'] = emaildb
+                    msg['body'] = "our Password is last 4 digit of mobile no"
+                    msg.set_content("Your Password is last 4 digit of mobile no")
+                    html_msg = html
                 
 
-                # if  otp == int(userotp):
-                msg = EmailMessage()
-                msg['Subject'] = 'Fynd Result System'
-                msg['From'] = Email_data.EMAIL
-                msg['To'] = emaildb
-                msg['body'] = "our Password is last 4 digit of mobile no"
-                msg.set_content("Your Password is last 4 digit of mobile no")
-                html_msg = html
-                
-
-                msg.add_alternative(html_msg, subtype='html')
-                msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
+                    msg.add_alternative(html_msg, subtype='html')
+                    msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
                                         Example:
                         Your password is : xxxxxx1234''')
-                mobile = data.mobile
-                # encrypt_pdf(html,mobile) 
+                    mobile = data.mobile
+                    encrypt_pdf(html,mobile) 
     
                 # adding the PDF Attachment
-                # with open("StudentData_Encrypted.pdf", 'rb') as fp:
-                #     pdf_data = fp.read()
-                #     ctype = 'application/octet-stream'
-                #     maintype, subtype = ctype.split('/', 1)
-                #     msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
+                    with open("StudentData_Encrypted.pdf", 'rb') as fp:
+                        pdf_data = fp.read()
+                        ctype = 'application/octet-stream'
+                        maintype, subtype = ctype.split('/', 1)
+                        msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
                     
-                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                    smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
+                    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                        smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
                         
-                    smtp.send_message(msg)
+                        smtp.send_message(msg)
 
                 # return render_template("endpage.html",message="Check your mail for the result")
-                return redirect("/endpage")
+                    return redirect("/endpage")
             flash("Invalid OTP .... Please try again", "danger")
         return render_template("home.html")
 
@@ -152,7 +148,7 @@ def validateotp(rollno):
 @app.route("/endpage", methods=['GET','POST'])
 def endpage():
     
-    # removePdf()
+    removePdf()
     return render_template("endpage.html")
 
 
@@ -175,7 +171,7 @@ def login():
 @app.route("/adminview",methods=['GET','POST'])
 def add():
     if 'logged_in' in session:
-        #form = AddStudentForm()
+        # form = AddStudentForm()
         if request.method == "POST":
             rollno = request.form.get('rollno')
             name = request.form.get('name')
