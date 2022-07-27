@@ -35,20 +35,31 @@ def sendOtp(email,x):
                 
             smtp.send_message(msg)
 
+            
+if 'DYNO' in os.environ:
+    print ('loading wkhtmltopdf path on heroku')
+    WKHTMLTOPDF_CMD = subprocess.Popen(
+        ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
+        stdout=subprocess.PIPE).communicate()[0].strip()
+else:
+    print ('loading wkhtmltopdf path on localhost')
+    MYDIR = os.path.dirname(__file__)    
+    WKHTMLTOPDF_CMD = os.path.join(MYDIR + "/static/executables/bin/", "wkhtmltopdf.exe")
+
 def encrypt_pdf(html,mobile):
     # config = pdfkit.configuration(wkhtmltopdf='/bin/wkhtmltopdf')
 
-    os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
-    WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
-    stdout=subprocess.PIPE).communicate()[0].strip()
-    pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+    # os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
+    # WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
+    # stdout=subprocess.PIPE).communicate()[0].strip()
+    # pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
-    
+
     # WKHTMLTOPDF_CMD = subprocess.Popen(
     # ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')], # Note we default to 'wkhtmltopdf' as the binary name
     #     stdout=subprocess.PIPE).communicate()[0].strip()
 
-    pdfkit.from_string(html,'StudentData.pdf', configuration=pdfkit_config)
+    pdfkit.from_string(html,'StudentData.pdf')
     out = PdfFileWriter()
     file = PdfFileReader("StudentData.pdf")  
     # Get number of pages in original file
