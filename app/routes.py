@@ -34,7 +34,7 @@ def sendOtp(email,x):
             smtp.send_message(msg)
 
 def encrypt_pdf(html,mobile):
-    config = pdfkit.configuration(wkhtmltopdf='/opt/bin/wkhtmltopdf')
+    config = pdfkit.configuration(wkhtmltopdf='/wkhtmltopdf')
     pdfkit.from_string(html,'StudentData.pdf', configuration=config)
     out = PdfFileWriter()
     file = PdfFileReader("StudentData.pdf")  
