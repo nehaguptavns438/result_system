@@ -31,7 +31,5 @@ tomli==2.0.1
 Werkzeug==2.1.2
 wkhtmltopdf==0.2
 WTForms==3.0.1
-wkhtmltopdf-pack
-# git+git://github.com/johnfraney/wkhtmltopdf-pack.git
-# pdfkit==0.6.1
+
 

@@ -1,4 +1,3 @@
-import subprocess
 from flask import Blueprint, render_template,flash, redirect,request, session
 from app.forms import AdminLoginForm
 from app.constants import Email_data
@@ -34,13 +33,9 @@ def sendOtp(email,x):
                 
             smtp.send_message(msg)
 
-def _get_pdfkit_config():
-    WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
-    return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
-        
 def encrypt_pdf(html,mobile):
-    # config = pdfkit.configuration(wkhtmltopdf='/wkhtmltopdf')
-    pdfkit.from_string(html,'StudentData.pdf', configuration=_get_pdfkit_config)
+    config = pdfkit.configuration(wkhtmltopdf='/bin/wkhtmltopdf')
+    pdfkit.from_string(html,'StudentData.pdf', configuration=config)
     out = PdfFileWriter()
     file = PdfFileReader("StudentData.pdf")  
     # Get number of pages in original file
