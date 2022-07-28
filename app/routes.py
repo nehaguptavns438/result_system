@@ -41,8 +41,8 @@ def encrypt_pdf(html,mobile):
     WKHTMLTOPDF_CMD = subprocess.Popen(
     ['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], # Note we default to 'wkhtmltopdf' as the binary name
     stdout=subprocess.PIPE).communicate()[0].strip()
-    # config = pdfkit.configuration(wkhtmltopdf=app.config['WKHTMLTOPDF_CMD'])
-    config = pdfkit.configuration(wkhtmltopdf='/app/bin/wkhtmltopdf')
+    config = pdfkit.configuration(wkhtmltopdf=app.config['WKHTMLTOPDF_CMD'])
+    # config = pdfkit.configuration(wkhtmltopdf='/app/bin/wkhtmltopdf')
 
     # os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
     # WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
