@@ -29,8 +29,6 @@ six==1.16.0
 SQLAlchemy==1.4.25
 tomli==2.0.1
 Werkzeug==2.1.2
-wkhtmltopdf==0.2
 WTForms==3.0.1
-wkhtmltopdf-pack-ng==0.12.3.0
 
 
