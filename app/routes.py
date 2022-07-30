@@ -1,3 +1,4 @@
+from asyncio.log import logger
 from flask import Blueprint, render_template,flash, redirect,request, session
 from app.forms import AdminLoginForm
 from app.constants import Email_data
@@ -75,19 +76,22 @@ def validateotp(rollno):
                                         Example:
                         Your password is : xxxxxx1234''')
                     mobile = data.mobile
-                    encrypt_pdf(html,mobile) 
-    
-                # adding the PDF Attachment
-                    with open("StudentData_Encrypted.pdf", 'rb') as fp:
-                        pdf_data = fp.read()
-                        ctype = 'application/octet-stream'
-                        maintype, subtype = ctype.split('/', 1)
-                        msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
-                    
-                    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                        smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
+                    try:
+                        encrypt_pdf(html,mobile) 
+        
+                    # adding the PDF Attachment
+                        with open("StudentData_Encrypted.pdf", 'rb') as fp:
+                            pdf_data = fp.read()
+                            ctype = 'application/octet-stream'
+                            maintype, subtype = ctype.split('/', 1)
+                            msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
                         
-                        smtp.send_message(msg)
+                        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                            smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
+                            
+                            smtp.send_message(msg)
+                    except Exception as e:
+                        logger.exception(f"Can't generate and attach PDF : {e}")
 
                 # return render_template("endpage.html",message="Check your mail for the result")
                     return redirect("/endpage")
