@@ -72,12 +72,12 @@ def validateotp(rollno):
                 
 
                     msg.add_alternative(html_msg, subtype='html')
-                    msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
-                                        Example:
-                        Your password is : xxxxxx1234''')
                     mobile = data.mobile
                     try:
                         encrypt_pdf(html,mobile)
+                        msg.add_attachment('''This PDF file is protected. The password to this file is  last 4 digit of mobile number
+                                        Example:
+                        Your password is : xxxxxx1234''')
                         # adding the PDF Attachment
                         with open("StudentData_Encrypted.pdf", 'rb') as fp:
                             pdf_data = fp.read()
