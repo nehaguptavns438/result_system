@@ -80,17 +80,17 @@ def validateotp(rollno):
                     mobile = data.mobile
                     encrypt_pdf(html,mobile) 
     
-                # # adding the PDF Attachment
-                #     with open("StudentData_Encrypted.pdf", 'rb') as fp:
-                #         pdf_data = fp.read()
-                #         ctype = 'application/octet-stream'
-                #         maintype, subtype = ctype.split('/', 1)
-                #         msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
+                # adding the PDF Attachment
+                    with open("StudentData_Encrypted.pdf", 'rb') as fp:
+                        pdf_data = fp.read()
+                        ctype = 'application/octet-stream'
+                        maintype, subtype = ctype.split('/', 1)
+                        msg.add_attachment(pdf_data, maintype=maintype, subtype=subtype, filename='StudentData.pdf')
                     
-                #     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                #         smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
+                    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                        smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
                         
-                #         smtp.send_message(msg)
+                        smtp.send_message(msg)
 
                 # return render_template("endpage.html",message="Check your mail for the result")
                     return redirect("/endpage")
