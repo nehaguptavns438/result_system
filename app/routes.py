@@ -103,8 +103,10 @@ def validateotp(rollno):
 
 @app.route("/endpage", methods=['GET','POST'])
 def endpage():
-    
-    removePdf()
+    try:
+        removePdf()
+    except Exception as e:
+        logger.exception(f"PDF not found in root directory : {e}")
     return render_template("endpage.html")
 
 
