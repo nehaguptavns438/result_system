@@ -36,18 +36,6 @@ def home():
             return redirect('/')
     return render_template("home.html")
 
-@app.route("/resendotp", methods=['POST'])
-def resend():
-    if request.method == 'POST':
-        
-        if 'email' in session: #resend otp
-            emaildb = session['email'][0] #resend otp
-            x = generateOtp() #resend otp
-            sendOtp(emaildb,x) #resend otp
-            rollno = session['email'][1]
-            return render_template("validateotp.html",rollno = rollno)
-        return render_template("home.html")
-
 @app.route("/validateotp/<int:rollno>", methods=['POST'])
 def validateotp(rollno):
     if request.method == 'POST':
@@ -98,8 +86,17 @@ def validateotp(rollno):
             flash("Invalid OTP .... Please try again", "danger")
         return render_template("home.html")
 
-
-
+@app.route("/resendotp", methods=['POST'])
+def resend():
+    if request.method == 'POST':
+        
+        if 'email' in session: #resend otp
+            emaildb = session['email'][0] #resend otp
+            x = generateOtp() #resend otp
+            sendOtp(emaildb,x) #resend otp
+            rollno = session['email'][1]
+            return render_template("validateotp.html",rollno = rollno)
+        return render_template("home.html")
 
 @app.route("/endpage", methods=['GET','POST'])
 def endpage():
@@ -108,6 +105,8 @@ def endpage():
     except Exception as e:
         logger.exception(f"PDF not found in root directory : {e}")
     return render_template("endpage.html")
+
+# # ..................ADMIN.......................
 
 
 @app.route("/adminlogin", methods=['GET', 'POST'])
@@ -123,7 +122,7 @@ def login():
                 flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('adminlogin.html', title="Login", form=form)
 
-    # ..................ADMIN.......................
+   
 
 
 @app.route("/adminview",methods=['GET','POST'])
