@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-    
-        <title>Fynd Academy</title>
-        <link rel="icon" type="image" href="static/fynd.jpg">
-    
-    <style>
-      body, html {
-        height: 100%;
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      
-      * {
-        box-sizing: border-box;
-      }
-      
-      .bg-image {
-        /* The image used */
-        background-image: url("static/fynd_academy.jpg");
-        
-        /* Add the blur effect */
-        filter: blur(10px);
-        -webkit-filter: blur(10px);
-        
-        /* Full height */
-        height: 100%; 
-        
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      /* Position text in the middle of the page/image */
-      .bg-text {
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.096); /* Black w/opacity/see-through */
-        color: #111010;
-        font-weight: bold;
-        /* border: 3px solid #f1f1f1; */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        width: 80%;
-        padding: 20px;
-        text-align: center;
-      }
 
-      
+  <title>Fynd Academy</title>
+  <link rel="icon" type="image" href="static/fynd.jpg">
 
-      
-      </style>
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .bg-image {
+      /* The image used */
+      background-image: url("static/fynd_academy.jpg");
+
+      /* Add the blur effect */
+      filter: blur(10px);
+      -webkit-filter: blur(10px);
+
+      /* Full height */
+      height: 100%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    /* Position text in the middle of the page/image */
+    .bg-text {
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.096);
+      /* Black w/opacity/see-through */
+      color: #111010;
+      font-weight: bold;
+      /* border: 3px solid #f1f1f1; */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      width: 80%;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
 
 </head>
+
 <body>
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
       <div class="container">
         <a class="navbar-brand mr-4" href="/">Fynd Academy</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
@@ -85,25 +88,16 @@
       </div>
     </nav>
   </header>
+
   <body>
 
     <div class="bg-image"></div>
-    
+
     <div class="bg-text">
       <h2 style="color:black">Check your email for result</h2>
       <h1 style="color:black">Thank You</h1>
       <p>Fynd Academy</p>
     </div>
-    
-    </body>
-    </html>
+  </body>
 
-
-
-
-<!-- <center><a href="http://127.0.0.1:5000/"></a></center> -->
-
-
-
-
-
+</html>

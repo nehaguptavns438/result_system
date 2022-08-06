@@ -7,54 +7,47 @@ from app.constants import Email_data
 from flask import session
 import smtplib
 
-
-
 def generateOtp():
-    return random.randint(1111,9999)
+    return random.randint(1111, 9999)
 
-def encrypt_pdf(html,mobile):
+def encrypt_pdf(html, mobile):
     # pdfkit.from_string(html,'StudentData.pdf', configuration=config)
-    pdfkit.from_string(html,'StudentData.pdf')
+    pdfkit.from_string(html, "StudentData.pdf")
     out = PdfFileWriter()
-    file = PdfFileReader("StudentData.pdf")  
+    file = PdfFileReader("StudentData.pdf")
     # Get number of pages in original file
-    num = file.numPages    
-    # Iterate through every page of the original 
+    num = file.numPages
+    # Iterate through every page of the original
     # file and add it to our new file.
-    for idx in range(num):        
+    for idx in range(num):
         # Get the page at index idx
-        page = file.getPage(idx)        
+        page = file.getPage(idx)
         # Add it to the output file
-        out.addPage(page)        
-    # Create a variable password and store 
+        out.addPage(page)
+    # Create a variable password and store
     # our password in it.
-    password = mobile[6:]    
+    password = mobile[6:]
     # Encrypt the new file with the entered password
-    out.encrypt(password)    
+    out.encrypt(password)
     # Open a new file "myfile_encrypted.pdf"
-    with open("StudentData_Encrypted.pdf", "wb") as f:        
+    with open("StudentData_Encrypted.pdf", "wb") as f:
         # Write our encrypted PDF to this file
         out.write(f)
 
-
 def removePdf():
-        pdfdelete=("StudentData_Encrypted.pdf" , "StudentData.pdf")
-        os.remove(pdfdelete[0])
-        os.remove(pdfdelete[1])
+    pdfdelete = ("StudentData_Encrypted.pdf", "StudentData.pdf")
+    os.remove(pdfdelete[0])
+    os.remove(pdfdelete[1])
 
+def sendOtp(email, x):
+    msg = EmailMessage()
+    msg["Subject"] = "OTP FROM Fynd Academy"
+    msg["From"] = Email_data.EMAIL
+    msg["To"] = email
+    # x = generateOtp()
+    msg.set_content(str(x))
+    session["response"] = str(x)  # Storing otp in session
 
-
-
-def sendOtp(email,x):
-        msg = EmailMessage()
-        msg['Subject'] = 'OTP FROM Fynd Academy'
-        msg['From'] = Email_data.EMAIL
-        msg['To'] = email
-        # x = generateOtp()
-        msg.set_content(str(x))
-        session['response'] = str(x)  #Storing otp in session
-
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
-                
-            smtp.send_message(msg)
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
+        smtp.send_message(msg)
