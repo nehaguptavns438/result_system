@@ -198,7 +198,7 @@ def update():
                 db.session.commit()
             except Exception:
                 db.session.rollback()
-                flash(f"This email already exits", "info")
+                flash(f"This email/mobile already exits in database", "info")
                 return redirect ('/adminview')
                 
 
