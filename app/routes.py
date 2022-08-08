@@ -84,7 +84,6 @@ def validateotp(rollno):
                 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
                     smtp.login(Email_data.EMAIL, Email_data.PASSWORD)
                     smtp.send_message(msg)
-                # return render_template("endpage.html",message="Check your mail for the result")
                 return redirect("/endpage")
             flash("Invalid OTP .... Please try again", "danger")
         return render_template("home.html")
