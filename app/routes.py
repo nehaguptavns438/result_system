@@ -1,9 +1,9 @@
 from asyncio.log import logger
 from flask import Blueprint, render_template, flash, redirect, request, session
-from app.forms import AdminLoginForm
-from app.constants import Email_data
-from app.constants import Admin_data
-from app.models import Student
+from .forms import AdminLoginForm
+from .constants import Email_data
+from .constants import Admin_data
+from .models import Student
 from .extenstion import db
 import smtplib
 from app.utils import encrypt_pdf, generateOtp, sendOtp, removePdf

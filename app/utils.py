@@ -11,7 +11,6 @@ def generateOtp():
     return random.randint(1111, 9999)
 
 def encrypt_pdf(html, mobile):
-    # pdfkit.from_string(html,'StudentData.pdf', configuration=config)
     pdfkit.from_string(html, "StudentData.pdf")
     out = PdfFileWriter()
     file = PdfFileReader("StudentData.pdf")
