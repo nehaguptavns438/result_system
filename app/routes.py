@@ -110,7 +110,7 @@ def endpage():
     return render_template("endpage.html")
 
 
-# # ..................ADMIN.......................
+#....................ADMIN.......................
 
 
 @app.route("/adminlogin", methods=["GET", "POST"])
