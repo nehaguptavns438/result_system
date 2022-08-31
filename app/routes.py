@@ -171,7 +171,7 @@ def add():
             db.session.commit()
             flash("Data Inserted Successfully")
         page = request.args.get("page", 1, type=int)
-        alldata = Student.query.paginate(page=int(page), per_page=10)
+        alldata = Student.query.paginate(page=int(page), per_page=5)
         return render_template("adminview.html", alldata=alldata)
     return redirect("/adminlogin")
 
