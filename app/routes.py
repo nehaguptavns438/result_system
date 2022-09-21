@@ -52,7 +52,7 @@ def validateotp(rollno):
             if s == str(userotp):
                 # if otp == int(userotp):
                 msg = EmailMessage()
-                msg["Subject"] = "Fynd Result System"
+                msg["Subject"] = "IGT Result System"
                 msg["From"] = Email_data.EMAIL
                 msg["To"] = emaildb
                 msg["body"] = "our Password is last 4 digit of mobile no"
