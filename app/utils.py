@@ -40,7 +40,7 @@ def removePdf():
 
 def sendOtp(email, x):
     msg = EmailMessage()
-    msg["Subject"] = "OTP FROM IGT Academy"
+    msg["Subject"] = "OTP FROM Excellent Academy"
     msg["From"] = Email_data.EMAIL
     msg["To"] = email
     # x = generateOtp()
